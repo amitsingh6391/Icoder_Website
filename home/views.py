@@ -3,8 +3,9 @@
 # Create your views here.
 from django.shortcuts import render,HttpResponse
 
+from django.contrib import messages
 from home.models import Contact
-
+from blog.models import Post
 
 
 # Create your views here.
@@ -17,6 +18,7 @@ def about(request):
     #return HttpResponse("this is about")
 def contact(request):
     #return HttpResponse("this is contact")
+   
 
     if request.method=="POST":
 
@@ -28,9 +30,35 @@ def contact(request):
 
         print(name,email,phone,content)
 
-        contact = Contact(name=name,email=email,phone=phone,content=content)
-        contact.save()
+        if len(name)<2 or len(email)<3 or len(phone)<10 or len(content)<4:
+             messages.error(request, 'Please fill the formcorrectly.')
+
+        else:
+
+         
+        
+          contact = Contact(name=name,email=email,phone=phone,content=content)
+          contact.save()
+          messages.success(request, 'Your meesage has been send.')
+
+
+
+      
+
       
     
 
     return render(request,'home/contact.html',)
+
+def search(request):
+
+     query = request.GET['query']
+
+     allPosts=Post.objects.filter(title__icontains=query)
+
+     params = {"allPosts":allPosts}
+
+     return render(request,'home/search.html',params)
+
+    
+    # return HttpResponse("This is you serach")
