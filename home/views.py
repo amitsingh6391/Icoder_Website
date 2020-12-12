@@ -54,10 +54,19 @@ def search(request):
 
      query = request.GET['query']
 
-     allPosts=Post.objects.filter(title__icontains=query)
-
-     params = {"allPosts":allPosts}
-
+     if len(query)>78:
+         allPosts= Post.objects.none()
+     else:
+         allPostsTitle =Post.objects.filter(title__icontains=query)
+        
+         allPostContentent = Post.objects.filter(content__icontains = query)
+         
+         allPosts = allPostsTitle.union(allPostContentent)
+     
+     if allPosts.count() ==0:
+          messages.warning(request, 'no search result found Please reweite your query.')  
+     params = {"allPosts":allPosts,"query":query}
+ 
      return render(request,'home/search.html',params)
 
     

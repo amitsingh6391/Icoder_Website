@@ -5,17 +5,26 @@
 
 {% block body %}
   
-<div class="Container">
-    <h2>You Serach Result</h2>
+<div class="Container my-3">
+    <h4>Serach Result</h4>
 
-    
+    {% if allPosts|length < 01 %}
+  
+    <p>No search results found</p>
+
+
+
+    your search  - <b>{{query}}</b> - did not match any documents
+
+     <br>  suggestions:  Try differnts keywords    {% endif %}
+
     {% for post in allPosts %}
+
         
-   
-        
+      
     <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary"> Article By : {{post.author}}</strong>
+          <strong class="d-inline-block mb-2 text-primary">Article By : {{post.author}}</strong>
           <h3 class="mb-0"> {{post.title}} </h3>
           <div class="mb-1 text-muted">{{post.datetime}}</div>
           <p class="card-text mb-auto">{{post.content | truncatechars:500}}</p>
@@ -29,3 +38,44 @@
       {% endfor %}
 </div>
 {% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ class Contact(models.Model):
     phone =models.CharField(max_length=13)
     email = models.CharField(max_length=50)
     content = models.TextField()
-    # timeStamp=models.DateField( auto_now_add=True,blank=True,)
+    timeStamp=models.DateField( auto_now_add=True,blank=True,)
 
 
     def __str__(self):
