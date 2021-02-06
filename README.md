@@ -1,3 +1,5 @@
 # Icoder_Website
 Read me update
-Icoder is a Django website(webapp) where user can share their code and thoughts that's relate to their field
+This is simple blog website by using Django framework
+You can post any article with images and source links
+
